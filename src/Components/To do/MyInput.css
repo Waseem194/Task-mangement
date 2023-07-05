@@ -1,0 +1,14 @@
+.add_btn {
+  width: 100px;
+}
+textarea {
+  border-radius: 0.5em;
+}
+.btn_icon {
+  display: flex;
+}
+.Icon {
+  padding: 1em;
+  height: 25px;
+  width: 25px;
+}

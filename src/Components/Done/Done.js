@@ -1,10 +1,18 @@
-import React, { Fragment } from "react";
+import React, { Fragment,useState } from "react";
+import MyInput from "../To do/MyInput";
 import { Container, Row, Col, Button } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus, faEllipsis } from "@fortawesome/free-solid-svg-icons";
 import "./Done.css";
 
 const Done = () => {
+  const [showEditor, setShowEditor] = useState(false);
+  const handleBtnClick = () => {
+    setShowEditor(true);
+  }
+  const handleCancel = () => {
+    setShowEditor(false);
+  };
   return (
     <Fragment>
       <Container>
@@ -15,9 +23,18 @@ const Done = () => {
                 Done
                 <FontAwesomeIcon icon={faEllipsis} className="float-end" />
               </h2>
-              <Button variant="outline-light" size="lg" className="text-start">
+                {showEditor ? (
+                <MyInput handleCancel={handleCancel}/>
+              ) : (
+                <Button
+                  variant="outline-light"
+                  size="lg"
+                  className="text-start"
+                  onClick={handleBtnClick}
+                >
                 <FontAwesomeIcon icon={faPlus} /> add a card
               </Button>
+              )}
             </div>
           </Col>
         </Row>
