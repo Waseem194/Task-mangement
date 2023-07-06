@@ -1,31 +1,26 @@
-import React, { Fragment } from "react";
-import Todo from "./To do/Todo";
-import Doing from "./Doing/Doing";
-import Done from "./Done/Done";
-import { Col, Container,Row } from "react-bootstrap";
+import React from "react";
+import Board from "./Board/Board";
+import { BoardProvider } from "./context";
 
-const Project=()=>{
-  return(
-<Fragment>
-  <Container>
-    <Row>
-      <Col md={4}>
-      <Todo/>
-      </Col>
-      <Col  md={4}>
-      <Doing/>
-      </Col>
-      <Col md={4}>
-      <Done/>
-      </Col>
-    </Row>
-  </Container>
+import { Col, Container, Row } from "react-bootstrap";
 
-
-
-</Fragment>
-  )
-
-  
-}
+const Project = () => {
+  return (
+    <BoardProvider>
+      <Container>
+        <Row>
+          <Col md={4}>
+            <Board title="Todo" boardType="todo" />
+          </Col>
+          <Col md={4}>
+            <Board title="Doing" boardType="doing" />
+          </Col>
+          <Col md={4}>
+            <Board title="Done" boardType="done" />
+          </Col>
+        </Row>
+      </Container>
+    </BoardProvider>
+  );
+};
 export default Project;

@@ -2,6 +2,7 @@
   width: 100px;
 }
 textarea {
+  width: 21em;
   border-radius: 0.5em;
 }
 .btn_icon {
