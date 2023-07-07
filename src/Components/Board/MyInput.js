@@ -3,7 +3,11 @@ import { Button, Form } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
 import { BoardContext } from "../context";
+
+import { v4 as uuid } from "uuid";
 import "./MyInput.css";
+
+
 const MyInput = ({ handleCancel, boardType }) => {
   const [value, setValue] = useState("");
   const [validated, setValidated] = useState(false);
@@ -12,14 +16,15 @@ const MyInput = ({ handleCancel, boardType }) => {
     event.preventDefault();
     const form = event.currentTarget;
     if (form.checkValidity()) {
-      console.log(value);
       dispatch({
         payload: {
           boardType,
+          id: uuid(),
           title: value,
         },
         type: "cardData",
       });
+      handleCancel();
     }
   };
   return (

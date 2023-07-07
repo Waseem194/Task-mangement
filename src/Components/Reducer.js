@@ -5,8 +5,24 @@ export const reducer = (state, action) => {
       return {
         list: [
           ...state.list,
-          { title: payload.title, boardType: payload.boardType },
+          {
+            title: payload.title,
+            boardType: payload.boardType,
+            id: payload.id,
+          },
         ],
+      };
+    case "updateCardData":
+      return {
+        list: state.list.map((listItem) => {
+          if(payload.id === listItem.id) {
+            return {
+              ...listItem,
+              description: payload.description
+            }
+          }
+          return listItem;
+        }),
       };
     default:
       return state;
