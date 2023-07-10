@@ -1,5 +1,6 @@
 import React, { useState, useContext, useEffect, Fragment } from "react";
 import { Button, Modal, Form, Container, Row, Col } from "react-bootstrap";
+import MyInput from "./Board/MyInput";
 
 const ModalWindow = ({ showModal, handleClose, toDoItem, updateTodoItem }) => {
   const [editing, setEditing] = useState(false);
@@ -23,6 +24,9 @@ const ModalWindow = ({ showModal, handleClose, toDoItem, updateTodoItem }) => {
     handleClose();
     setValue("");
   };
+  const toggleEditing = () => {
+    setEditing((state) => !state);
+  };
 
   console.log(editing);
 
@@ -36,11 +40,20 @@ const ModalWindow = ({ showModal, handleClose, toDoItem, updateTodoItem }) => {
           <Row>
             <Col md={6}>
               <Form noValidate validated={validated} onSubmit={handleSubmit}>
-                {toDoItem.description || editing ? (
-                  <Fragment>
-                    {toDoItem.description}{" "}
-                    <Button variant="secondary">Edit</Button>
-                  </Fragment>
+                {toDoItem.description ? (
+                  editing ? (
+                    <MyInput />
+                  ) : (
+                    <Fragment>
+                      {toDoItem.description}
+                      <Button
+                        variant="secondary"
+                        onClick={() => toggleEditing()}
+                      >
+                        Edit
+                      </Button>
+                    </Fragment>
+                  )
                 ) : (
                   <Fragment>
                     <textarea
@@ -50,8 +63,9 @@ const ModalWindow = ({ showModal, handleClose, toDoItem, updateTodoItem }) => {
                         setValue(event.target.value);
                       }}
                       placeholder="Enter your task..."
-                      style={{ width: "100%"}}
+                      style={{ width: "100%" }}
                     />
+
                     <Button variant="primary" type="submit">
                       Save Changes
                     </Button>
