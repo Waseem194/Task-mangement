@@ -23,9 +23,12 @@ const MyInput = ({ handleCancel, boardType }) => {
           title: value,
         },
         type: "cardData",
+        
       });
+     
       handleCancel();
     }
+  
   };
   return (
     <Fragment>

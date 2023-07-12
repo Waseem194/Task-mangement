@@ -1,4 +1,5 @@
 import React, { Fragment, useState, useContext } from "react";
+
 import ModalWindow from "../ModalWindow";
 import MyInput from "./MyInput";
 
@@ -12,14 +13,16 @@ import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import "./Board.css";
 
 const Board = ({ title, boardType }) => {
+  // prop drilling
   const [showEditor, setShowEditor] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [toDoItem, setToDoItem] = useState({});
 
   const handleClose = () => setShowModal(false);
 
-  const { state, dispatch } = useContext(BoardContext);
-  const { list } = state || {};
+  const { state = {}, dispatch } = useContext(BoardContext);
+  const { list = []} = state;
+
   const handleBtnClick = () => {
     setShowEditor(true);
   };
@@ -43,7 +46,6 @@ const Board = ({ title, boardType }) => {
   const handleDragOver = (event) => {
     event.preventDefault();
   };
-
   return (
     <Fragment>
       <Container>
@@ -63,27 +65,27 @@ const Board = ({ title, boardType }) => {
                 className="droppable d-grid gap-1"
                 onDragOver={handleDragOver}
               >
-                {Array.isArray(list) &&
-                  list.map((item, index) => {
-                    if (item.boardType === boardType) {
-                      return (
-                        <Button
-                          variant="dark"
-                          key={index}
-                          draggable="true"
-                          onDragStart={handleDragStart}
-                          id={uuid()}
-                          onClick={() => {
-                            setToDoItem(item);
-                            setShowModal(true);
-                          }}
-                        >
-                          {item.title}
-                        </Button>
-                      );
-                    }
-                    return null;
-                  })}
+                {list.map((item, index) => {
+                  console.log(item);
+                  if (item.boardType === boardType) {
+                    return (
+                      <Button
+                        variant="dark"
+                        key={index}
+                        draggable="true"
+                        onDragStart={handleDragStart}
+                        id={uuid()}
+                        onClick={() => {
+                          setToDoItem(item);
+                          setShowModal(true);
+                        }}
+                      >
+                        {item.title}
+                      </Button>
+                    );
+                  }
+                  return null;
+                })}
               </div>
               {/* <Button
                 variant="light"

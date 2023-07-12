@@ -6,7 +6,7 @@ import Register from "./Components/Register/Register";
 import Board from "./Components/Board/Board";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { ToastContainer, toast } from 'react-toastify';
+import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import "./App.css";
 
@@ -19,7 +19,7 @@ function App() {
           <Route path="/" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/project" element={<Project />} />
-          <Route path="/board" element={<Board/>}/>
+          <Route path="/board" element={<Project/>}/>
         </Routes>
       </div>
       < ToastContainer/>

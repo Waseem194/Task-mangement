@@ -1,11 +1,21 @@
 import React, { useState, useContext, useEffect, Fragment } from "react";
-import { Button, Modal, Form, Container, Row, Col } from "react-bootstrap";
+import users from "../users.json";
+import {
+  Button,
+  Modal,
+  Form,
+  Container,
+  Row,
+  Col,
+ 
+} from "react-bootstrap";
 import MyInput from "./Board/MyInput";
 
 const ModalWindow = ({ showModal, handleClose, toDoItem, updateTodoItem }) => {
   const [editing, setEditing] = useState(false);
   const [validated, setValidated] = useState(false);
   const [value, setValue] = useState("");
+  const [user,setUser]=useState("");
 
   useEffect(() => {
     setValue(toDoItem.description);
@@ -27,8 +37,6 @@ const ModalWindow = ({ showModal, handleClose, toDoItem, updateTodoItem }) => {
   const toggleEditing = () => {
     setEditing((state) => !state);
   };
-
-  console.log(editing);
 
   return (
     <Modal show={showModal} onHide={onHide}>
@@ -74,7 +82,25 @@ const ModalWindow = ({ showModal, handleClose, toDoItem, updateTodoItem }) => {
               </Form>
             </Col>
             <Col md={6}>
-              <select></select>
+              {editing ? (
+                <Form.Select aria-label="Default select example" onChange={(event) setUser} value={value}>
+                <option>Users</option>
+                {users.map((user, index) => {
+                  return (
+
+                    <option key={index} value="1">
+                      {user.name}: {user.email}
+                    </option>
+
+                  );
+                })}
+              </Form.Select>
+              ) : (
+                <Fragment>
+                  {toDoItem.}
+                </Fragment>
+              )}
+              
             </Col>
           </Row>
         </Container>
