@@ -21,8 +21,8 @@ const Board = ({ title, boardType }) => {
   const handleClose = () => setShowModal(false);
 
   const { state = {}, dispatch } = useContext(BoardContext);
-  const { list = []} = state;
-
+  const { list = [] } = state;
+ 
   const handleBtnClick = () => {
     setShowEditor(true);
   };
@@ -34,9 +34,16 @@ const Board = ({ title, boardType }) => {
   };
   const handleDrop = (event) => {
     event.preventDefault();
-    console.log(event);
-    const data = event.dataTransfer.getData("text");
-    event.target.appendChild(document.getElementById(data));
+    const id = event.dataTransfer.getData("text");
+    const status = event.target.dataset.boardtype;
+    dispatch({
+      type: "heading",
+      payload: {
+        id,
+        status,
+      },
+    });
+    event.target.appendChild(document.getElementById(id));
     handleCancel();
   };
 
@@ -45,6 +52,7 @@ const Board = ({ title, boardType }) => {
   };
   const handleDragOver = (event) => {
     event.preventDefault();
+    
   };
   return (
     <Fragment>
@@ -64,9 +72,9 @@ const Board = ({ title, boardType }) => {
                 onDrop={handleDrop}
                 className="droppable d-grid gap-1"
                 onDragOver={handleDragOver}
+                data-boardtype={boardType}
               >
                 {list.map((item, index) => {
-                  console.log(item);
                   if (item.boardType === boardType) {
                     return (
                       <Button
@@ -74,7 +82,7 @@ const Board = ({ title, boardType }) => {
                         key={index}
                         draggable="true"
                         onDragStart={handleDragStart}
-                        id={uuid()}
+                        id={item.id}
                         onClick={() => {
                           setToDoItem(item);
                           setShowModal(true);

@@ -16,7 +16,6 @@ const Register = () => {
     const form = event.currentTarget;
     const isValid = form.checkValidity();
     if (isValid) {
-      console.log(email, password);
       try {
         const user = await createUserWithEmailAndPassword(
           auth,
@@ -25,7 +24,7 @@ const Register = () => {
         );
         toast("You are register success")
       } catch (error) {
-        console.log(error);
+        console.error(error);
       }
     } else setValidate(true);
     

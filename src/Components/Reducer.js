@@ -18,12 +18,25 @@ export const reducer = (state, action) => {
           if(payload.id === listItem.id) {
             return {
               ...listItem,
-              description: payload.description
+              description: payload.description,
+              user: payload.user,
             }
           }
           return listItem;
         }),
       };
+      case "heading":
+        return {
+          list: state.list.map((listItem) => {
+            if(payload.id === listItem.id) {
+              return {
+                ...listItem,
+                status: payload.status,
+              }
+            }
+            return listItem;
+          }),
+        };
     default:
       return state;
   }

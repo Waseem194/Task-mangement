@@ -40,6 +40,7 @@ const MyInput = ({ handleCancel, boardType }) => {
             setValue(event.target.value);
           }}
           placeholder="Enter your task"
+          style={{ width: "100%" }}
         />
         <div className="btn_icon">
           <Button variant="success" className="add_btn" type="submit">

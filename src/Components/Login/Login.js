@@ -15,7 +15,6 @@ const Login = () => {
     const form = event.currentTarget;
     const isValid = form.checkValidity();
     if (isValid) {
-      console.log(email, password);
       try {
         await signInWithEmailAndPassword(auth, email, password);
         toast("You are login success");
